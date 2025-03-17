@@ -7,7 +7,7 @@ import { Input } from "@heroui/input";
 import { Card, CardBody, CardHeader } from "@heroui/card";
 import { Spinner } from "@heroui/spinner";
 
-const OcrReader = () => {
+const OcrImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [ocrResult, setOcrResult] = useState<string>('');
   const [ocrStatus, setOcrStatus] = useState<string>('');
@@ -154,4 +154,4 @@ const OcrReader = () => {
   );
 };
 
-export default OcrReader;
+export default OcrImageUpload;
