@@ -1,55 +1,32 @@
-# Next.js & HeroUI Template
+# Next Eagle OCR
 
-This is a template for creating applications using Next.js 14 (pages directory) and HeroUI (v2).
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/next-pages-template)
+## Description
 
-> Note: Since Next.js 14, the pages router is recommend migrating to the [new App Router](https://nextjs.org/docs/app) to leverage React's latest features
->
-> Read more: [Pages Router](https://nextjs.org/docs/pages)
+This project aims to establish an efficient method for triaging incoming medical donations and recyclables. It involves scanning the packaging to identify the product type and calculating a relevance score for various products available in the database. The warehouse sorter can then use this information to scan the product and select from the matching options provided. Additionally, with the assistance of the Boxer-Boy project, the system will determine the appropriate box for containing the donation.
 
-## Technologies Used
+## Technologies
+This project uses the following technologies:
+- Next.js
+- HeroUI
+- Tailwind CSS
+- TypeScript
+- Tesseract.js
+- DDEV
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI](https://heroui.com)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
-- [next-themes](https://github.com/pacocoursey/next-themes)
-
-## How to Use
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-pages-template
+## Local Development
+If you wish to use docker to run the web application, and that it requires to be detached from your computer's environment, and sharable in the internet, you may run it via DDEV:
+```
+ddev start     # Start the DDEV environment and containers
+ddev describe  # Show detailed information about the current DDEV project
+ddev share     # Create a temporary public URL for sharing your local DDEV site
 ```
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
+Otherwise you can simply run it on your local via npm:
 ```
-
-### Run the development server
-
-```bash
-npm run dev
+npm run dev     # Start the development server on localhost:3000
+npm run build   # Create an optimized production build
+npm run start   # Run the production server
+npm run lint    # Run ESLint to check code quality
+npm run test    # Run Jest test suites
 ```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/heroui-inc/next-pages-template/blob/main/LICENSE).
