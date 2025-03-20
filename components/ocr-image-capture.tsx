@@ -9,14 +9,14 @@ import Webcam                            from 'react-webcam';
 
 const OcrImageCapture = () => {
   // WEB RELATED
-  const webcamRef                             = useRef<Webcam>(null);           // Webcam reference
+  const webcamRef                             = useRef<Webcam>(null);            // Webcam reference
   const videoConstraints = {width: 1280,height: 720, facingMode: "environment"}; // Video constraints
-  const [isCameraActive,   setIsCameraActive] = useState(false);                // Camera active state
+  const [isCameraActive,   setIsCameraActive] = useState(false);                 // Camera active state
   // OCR RELATED
-  const [capturedImage,    setCapturedImage]  = useState<string | null>(null);  // Captured image
-  const [ocrResult,        setOcrResult]      = useState<string>('');           // OCR result
-  const [ocrStatus,        setOcrStatus]      = useState<string>('');           // OCR status
-  const [isProcessing,     setIsProcessing]   = useState(false);                // Processing state
+  const [capturedImage,    setCapturedImage]  = useState<string | null>(null);   // Captured image
+  const [ocrResult,        setOcrResult]      = useState<string>('');            // OCR result
+  const [ocrStatus,        setOcrStatus]      = useState<string>('');            // OCR status
+  const [isProcessing,     setIsProcessing]   = useState(false);                 // Processing state
 
   // HANDLE CAMERA START/STOP
   const startCamera = () => {
@@ -87,14 +87,14 @@ const OcrImageCapture = () => {
                 />
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                   <Button
-                    onClick={stopCamera}
+                    onPress={stopCamera}
                     color="danger"
                     variant="shadow"
                   >
                     Cancel
                   </Button>
                   <Button
-                    onClick={capture}
+                    onPress={capture}
                     color="primary"
                     variant="shadow"
                   >
@@ -111,7 +111,7 @@ const OcrImageCapture = () => {
                 />
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                   <Button
-                    onClick={retake}
+                    onPress={retake}
                     color="danger"
                     variant="shadow"
                   >
@@ -166,7 +166,7 @@ const OcrImageCapture = () => {
       <div className="flex justify-center py-4 gap-4">
         {!isCameraActive && !capturedImage && (
           <Button
-            onClick={startCamera}
+            onPress={startCamera}
             color="primary"
             variant="shadow"
             size="lg"
@@ -176,7 +176,7 @@ const OcrImageCapture = () => {
         )}
         {capturedImage && (
           <Button
-            onClick={readImageText}
+            onPress={readImageText}
             isDisabled={isProcessing}
             color="primary"
             variant="shadow"

@@ -7,13 +7,13 @@ const IndexPage = () => {
   return (
     <div style={{ padding: 10 }}>
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+        <Tab.List className="max-w-4xl mx-auto flex space-x-1 rounded-xl bg-gray-200 p-1 my-8">
           <Tab
             className={({ selected }: { selected: boolean }) =>
               `w-full rounded-lg py-2.5 text-sm font-medium leading-5
               ${selected
-                ? 'bg-white text-blue-700 shadow'
-                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                ? 'bg-white text-black shadow'
+                : 'text-gray-500 hover:bg-white/[0.12] hover:text-gray-300'
               }`
             }
           >
@@ -23,8 +23,8 @@ const IndexPage = () => {
             className={({ selected }: { selected: boolean }) =>
               `w-full rounded-lg py-2.5 text-sm font-medium leading-5
               ${selected
-                ? 'bg-white text-blue-700 shadow'
-                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                ? 'bg-white text-black shadow'
+                : 'text-gray-500 hover:bg-white/[0.12] hover:text-gray-300'
               }`
             }
           >

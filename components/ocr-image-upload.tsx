@@ -110,7 +110,7 @@ const OcrImageUpload = () => {
       {/* Extract Button Section */}
       <div className="flex justify-center py-4">
         <Button
-          onClick={readImageText}
+          onPress={readImageText}
           isDisabled={!selectedImage || isProcessing}
           color="primary"
           variant="shadow"
