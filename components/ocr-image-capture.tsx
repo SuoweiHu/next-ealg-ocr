@@ -1,36 +1,34 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { createWorker } from 'tesseract.js';
-import { Button } from "@heroui/button";
-import { Card, CardBody, CardHeader } from "@heroui/card";
-import { Spinner } from "@heroui/spinner";
-import Webcam from 'react-webcam';
+import { createWorker                  } from 'tesseract.js';
+import { Button                        } from "@heroui/button";
+import { Card, CardBody, CardHeader    } from "@heroui/card";
+import { Spinner                       } from "@heroui/spinner";
+import Webcam                            from 'react-webcam';
 
 const OcrImageCapture = () => {
-  const webcamRef = useRef<Webcam>(null);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [ocrResult, setOcrResult] = useState<string>('');
-  const [ocrStatus, setOcrStatus] = useState<string>('');
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isCameraActive, setIsCameraActive] = useState(false);
+  // WEB RELATED
+  const webcamRef                             = useRef<Webcam>(null);           // Webcam reference
+  const videoConstraints = {width: 1280,height: 720, facingMode: "environment"}; // Video constraints
+  const [isCameraActive,   setIsCameraActive] = useState(false);                // Camera active state
+  // OCR RELATED
+  const [capturedImage,    setCapturedImage]  = useState<string | null>(null);  // Captured image
+  const [ocrResult,        setOcrResult]      = useState<string>('');           // OCR result
+  const [ocrStatus,        setOcrStatus]      = useState<string>('');           // OCR status
+  const [isProcessing,     setIsProcessing]   = useState(false);                // Processing state
 
-  const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: "environment"
-  };
-
+  // HANDLE CAMERA START/STOP
   const startCamera = () => {
     setIsCameraActive(true);
-    setOcrResult('');
-    setOcrStatus('');
+    setOcrResult('');//reset ocr result
+    setOcrStatus('');//reset ocr status
   };
-
   const stopCamera = () => {
     setIsCameraActive(false);
   };
 
+  // HANDLE IMAGE CAPTURE / RETAKE
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -38,31 +36,25 @@ const OcrImageCapture = () => {
       setIsCameraActive(false);
     }
   }, [webcamRef]);
-
   const retake = () => {
     setCapturedImage(null);
     setOcrResult('');
     setOcrStatus('');
   };
 
+  // HANDLE IMAGE TEXT EXTRACTION
   const readImageText = async () => {
     if (!capturedImage) return;
-
     setIsProcessing(true);
     setOcrStatus('Processing...');
     const worker = await createWorker('eng', 1, {
       logger: m => console.log(m),
     });
-
     try {
       // Convert base64 to blob
       const response = await fetch(capturedImage);
       const blob = await response.blob();
-
-      const {
-        data: { text },
-      } = await worker.recognize(blob);
-
+      const {data: { text },} = await worker.recognize(blob);
       setOcrResult(text);
       setOcrStatus('Completed');
     } catch (error) {

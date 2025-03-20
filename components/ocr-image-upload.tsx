@@ -1,18 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import { createWorker } from 'tesseract.js';
-import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
-import { Card, CardBody, CardHeader } from "@heroui/card";
-import { Spinner } from "@heroui/spinner";
+import { useState                    } from 'react';
+import { createWorker                } from 'tesseract.js';
+import { Button                      } from "@heroui/button";
+import { Input                       } from "@heroui/input";
+import { Card, CardBody, CardHeader  } from "@heroui/card";
+import { Spinner                     } from "@heroui/spinner";
 
 const OcrImageUpload = () => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [ocrResult, setOcrResult] = useState<string>('');
-  const [ocrStatus, setOcrStatus] = useState<string>('');
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedImage,    setSelectedImage]   = useState<File | null>(null);    // Selected image file
+  const [ocrResult,        setOcrResult]       = useState<string>('');           // OCR result
+  const [ocrStatus,        setOcrStatus]       = useState<string>('');           // OCR status
+  const [isProcessing,     setIsProcessing]    = useState(false);                // Processing state
 
+
+  // HANDLE IMAGE CHANGE EVENT
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setSelectedImage(event.target.files[0]);
@@ -21,20 +23,14 @@ const OcrImageUpload = () => {
     }
   };
 
+  // READ IMAGE TEXT
   const readImageText = async () => {
-    if (!selectedImage) return;
-
-    setIsProcessing(true);
-    setOcrStatus('Processing...');
-    const worker = await createWorker('eng', 1, {
-      logger: m => console.log(m),
-    });
-
+    if (!selectedImage) return; //Handle edge case where no image is selected
+    setIsProcessing(true); //Set processing state to true
+    setOcrStatus('Processing...'); //Set status to processing
+    const worker = await createWorker('eng', 1, {logger: m => console.log(m),}); //Create worker
     try {
-      const {
-        data: { text },
-      } = await worker.recognize(selectedImage);
-
+      const {data: { text }, } = await worker.recognize(selectedImage);
       setOcrResult(text);
       setOcrStatus('Completed');
     } catch (error) {
